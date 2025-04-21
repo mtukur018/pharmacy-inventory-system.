@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Pharmacy Inventory System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="sidebar">
+          <div class="sidebar-header">
+              <h2>Pharmacy System</h2>
+              <button id="toggleSidebar" class="toggle-sidebar">
+                  <i class="fas fa-bars"></i>
+              </button>
+          </div>
+          <div class="user-info">
+              <div class="user-avatar">
+                  <i class="fas fa-user-circle"></i>
+              </div>
+              <div class="user-details">
+                  <h3 id="userDisplayName">Admin</h3>
+                  <p id="userRole">Administrator</p>
+              </div>
+          </div>
+          <nav class="sidebar-nav">
+              <ul>
+                  <li class="active">
+                      <a href="admin-dashboard.html">
+                          <i class="fas fa-tachometer-alt"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="admin-inventory.html">
+                          <i class="fas fa-pills"></i>
+                          <span>Inventory</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="user-management.html">
+                          <i class="fas fa-users"></i>
+                          <span>User Management</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="reports.html">
+                          <i class="fas fa-chart-bar"></i>
+                          <span>Reports</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="settings.html">
+                          <i class="fas fa-cog"></i>
+                          <span>Settings</span>
+                      </a>
+                  </li>
+                  <li class="logout-item">
+                      <a href="#" id="logoutBtn">
+                          <i class="fas fa-sign-out-alt"></i>
+                          <span>Logout</span>
+                      </a>
+                  </li>
+              </ul>
+          </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+          <header class="content-header">
+              <h1>Admin Dashboard</h1>
+              <div class="header-actions">
+                  <div class="user-dropdown">
+                      <button class="user-dropdown-btn">
+                          <i class="fas fa-user-circle"></i>
+                          <span id="headerUsername">System Administrator</span>
+                          <i class="fas fa-chevron-down"></i>
+                      </button>
+                      <div class="user-dropdown-content">
+                          <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                          <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                          <a href="#" id="headerLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                      </div>
+                  </div>
+              </div>
+          </header>
+
+          <div class="dashboard-content">
+              <div class="dashboard-summary">
+                  <div class="summary-card">
+                      <div class="summary-icon bg-primary">
+                          <i class="fas fa-pills"></i>
+                      </div>
+                      <div class="summary-details">
+                          <h3>Total Medications</h3>
+                          <p id="totalMedications">0</p>
+                      </div>
+                  </div>
+                  <div class="summary-card">
+                      <div class="summary-icon bg-success">
+                          <i class="fas fa-dollar-sign"></i>
+                      </div>
+                      <div class="summary-details">
+                          <h3>Inventory Value</h3>
+                          <p id="inventoryValue">₦0.00</p>
+                      </div>
+                  </div>
+                  <div class="summary-card">
+                      <div class="summary-icon bg-warning">
+                          <i class="fas fa-exclamation-triangle"></i>
+                      </div>
+                      <div class="summary-details">
+                          <h3>Low Stock Items</h3>
+                          <p id="lowStockCount">0</p>
+                      </div>
+                  </div>
+                  <div class="summary-card">
+                      <div class="summary-icon bg-danger">
+                          <i class="fas fa-calendar-times"></i>
+                      </div>
+                      <div class="summary-details">
+                          <h3>Expiring Soon</h3>
+                          <p id="expiringSoonCount">0</p>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- New Price Summary Cards -->
+              <div class="dashboard-summary">
+                  <div class="summary-card">
+                      <div class="summary-icon bg-info">
+                          <i class="fas fa-tags"></i>
+                      </div>
+                      <div class="summary-details">
+                          <h3>Total Purchase Price</h3>
+                          <p id="totalPurchasePrice">₦0.00</p>
+                      </div>
+                  </div>
+                  <div class="summary-card">
+                      <div class="summary-icon bg-secondary">
+                          <i class="fas fa-shopping-cart"></i>
+                      </div>
+                      <div class="summary-details">
+                          <h3>Total Retail Price</h3>
+                          <p id="totalRetailPrice">₦0.00</p>
+                      </div>
+                  </div>
+                  <div class="summary-card">
+                      <div class="summary-icon bg-dark">
+                          <i class="fas fa-truck"></i>
+                      </div>
+                      <div class="summary-details">
+                          <h3>Total Wholesale Price</h3>
+                          <p id="totalWholesalePrice">₦0.00</p>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="dashboard-sections">
+                  <div class="dashboard-section">
+                      <div class="section-header">
+                          <h2>Category Distribution</h2>
+                      </div>
+                      <div class="section-content">
+                          <div id="categoryChart" class="chart-container">
+                              <!-- Chart will be rendered here -->
+                              <div class="chart-placeholder">
+                                  <div class="chart-legend" id="categoryLegend"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="dashboard-section">
+                      <div class="section-header">
+                          <h2>Recent Activities</h2>
+                      </div>
+                      <div class="section-content">
+                          <ul class="activity-list" id="activityList">
+                              <li class="activity-item">
+                                  <div class="activity-icon bg-primary">
+                                      <i class="fas fa-plus"></i>
+                                  </div>
+                                  <div class="activity-details">
+                                      <p>Added new medication: <strong>Amoxicillin</strong></p>
+                                      <span class="activity-time">Today, 10:30 AM</span>
+                                  </div>
+                              </li>
+                              <li class="activity-item">
+                                  <div class="activity-icon bg-warning">
+                                      <i class="fas fa-edit"></i>
+                                  </div>
+                                  <div class="activity-details">
+                                      <p>Updated stock for: <strong>Ibuprofen</strong></p>
+                                      <span class="activity-time">Yesterday, 3:45 PM</span>
+                                  </div>
+                              </li>
+                              <li class="activity-item">
+                                  <div class="activity-icon bg-success">
+                                      <i class="fas fa-user-plus"></i>
+                                  </div>
+                                  <div class="activity-details">
+                                      <p>Added new user: <strong>John Doe</strong></p>
+                                      <span class="activity-time">Yesterday, 1:20 PM</span>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="dashboard-sections">
+                  <div class="dashboard-section full-width">
+                      <div class="section-header">
+                          <h2>Low Stock Medications</h2>
+                          <a href="admin-inventory.html" class="view-all">View All</a>
+                      </div>
+                      <div class="section-content">
+                          <div class="table-responsive">
+                              <table class="dashboard-table">
+                                  <thead>
+                                      <tr>
+                                          <th>Name</th>
+                                          <th>Category</th>
+                                          <th>Stock</th>
+                                          <th>Purchase Price (₦)</th>
+                                          <th>Retail Price (₦)</th>
+                                          <th>Expiry Date</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="lowStockTable">
+                                      <!-- Will be populated by JavaScript -->
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="admin-dashboard.js"></script>
+
+<!-- Add Medication Modal -->
+<div id="medicationModal" class="modal hidden">
+  <div class="modal-content">
+    <span id="closeMedicationModal" class="close-button" data-dismiss="modal">&times;</span>
+    <h2 id="modalTitle">Add Medication</h2>
+    <form id="medicationForm">
+      <input type="text" id="medName" name="name" placeholder="Name" required />
+      <input type="text" id="medCategory" name="category" placeholder="Category" />
+      <input type="text" id="medManufacturer" name="manufacturer" placeholder="Manufacturer" />
+      <input type="number" id="medStock" name="stock" placeholder="Stock Quantity" />
+      <input type="number" id="medPurchasePrice" name="purchasePrice" placeholder="Purchase Price" />
+      <input type="number" id="medRetailPrice" name="retailPrice" placeholder="Retail Price" />
+      <input type="number" id="medWholesalePrice" name="wholesalePrice" placeholder="Wholesale Price" />
+      <input type="date" id="medExpiryDate" name="expiryDate" placeholder="Expiry Date" />
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
+

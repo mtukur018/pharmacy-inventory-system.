@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to login page if not authenticated
+        window.onload = function() {
+            // Check if user is logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                // If not logged in, redirect to login page
+                window.location.href = 'login.html';
+            } else {
+                // If logged in, redirect to appropriate dashboard based on role
+                const user = JSON.parse(currentUser);
+                if (user.role === 'admin') {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    window.location.href = 'user-dashboard.html';
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Loading Pharmacy Inventory System...</p>
+    </div>
+    <div class="container">
+        <header>
+            <h1>Pharmacy Inventory System</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search medications...">
+                <button id="searchBtn">Search</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="inventory-controls">
+                <button id="addMedicationBtn" class="primary-btn">Add New Medication</button>
+                <div class="filter-controls">
+                    <label for="categoryFilter">Filter by Category:</label>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="antibiotic">Antibiotics</option>
+                        <option value="analgesic">Analgesics</option>
+                        <option value="antiviral">Antivirals</option>
+                        <option value="cardiovascular">Cardiovascular</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="inventory-table-container">
+                <table id="inventoryTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Price (₦)</th>
+                            <th>Expiry Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <!-- Table content will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="emptyState" class="empty-state hidden">
+                <p>No medications found. Add a new medication or adjust your search criteria.</p>
+            </div>
+        </main>
+
+        <!-- Add Medication Modal -->
+        <div id="addMedicationModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2 id="modalTitle">Add New Medication</h2>
+                <form id="medicationForm">
+                    <input type="hidden" id="medicationId">
+                    <div class="form-group">
+                        <label for="medName">Medication Name *</label>
+                        <input type="text" id="medName" required>
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="medCategory">Category *</label>
+                        <select id="medCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="antibiotic">Antibiotics</option>
+                            <option value="analgesic">Analgesics</option>
+                            <option value="antiviral">Antivirals</option>
+                            <option value="cardiovascular">Cardiovascular</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="medStock">Stock Quantity *</label>
+                        <input type="number" id="medStock" min="0" required>
+                        <span class="error-message" id="stockError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="medPrice">Price (₦) *</label>
+                        <input type="number" id="medPrice" min="0" step="0.01" required>
+                        <span class="error-message" id="priceError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="medExpiry">Expiry Date *</label>
+                        <input type="date" id="medExpiry" required>
+                        <span class="error-message" id="expiryError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="medDescription">Description</label>
+                        <textarea id="medDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancelBtn" class="secondary-btn">Cancel</button>
+                        <button type="submit" id="saveBtn" class="primary-btn">Save Medication</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content confirmation-modal">
+                <h2>Confirm Deletion</h2>
+                <p>Are you sure you want to delete this medication?</p>
+                <div class="form-actions">
+                    <button id="cancelDeleteBtn" class="secondary-btn">Cancel</button>
+                    <button id="confirmDeleteBtn" class="danger-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification -->
+        <div id="notification" class="notification hidden">
+            <span id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+

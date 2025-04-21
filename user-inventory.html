@@ -1,0 +1,43 @@
+<script>
+    // Mock API implementation for offline testing
+    window.api = {
+        medications: {
+            getAll: async () => {
+                console.log('Mock API: Getting all medications');
+                return [
+                    {
+                        id: 1,
+                        name: "Paracetamol",
+                        category: "Pain Relief",
+                        manufacturer: "ABC Pharma",
+                        stock: 100,
+                        retailPrice: 500,
+                        wholesalePrice: 400,
+                        expiryDate: "2024-12-31",
+                        description: "For pain relief and fever"
+                    },
+                    {
+                        id: 2,
+                        name: "Amoxicillin",
+                        category: "Antibiotics",
+                        manufacturer: "XYZ Pharma",
+                        stock: 50,
+                        retailPrice: 1500,
+                        wholesalePrice: 1200,
+                        expiryDate: "2024-10-15",
+                        description: "Antibiotic medication"
+                    }
+                ];
+            }
+        },
+        settings: {
+            getAll: async () => {
+                console.log('Mock API: Getting settings');
+                return {
+                    lowStockThreshold: 20,
+                    expiryWarningDays: 30
+                };
+            }
+        }
+    };
+</script> 

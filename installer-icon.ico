@@ -1,0 +1,4 @@
+// Create a 256x256 icon file for the application
+// This file should be an .ico format with multiple sizes embedded (16x16, 32x32, 48x48, 256x256)
+// You can create this icon using tools like GIMP, Photoshop, or online converters
+// Save this file in your project directory as 'installer-icon.ico' 

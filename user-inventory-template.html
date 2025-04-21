@@ -1,0 +1,64 @@
+<!-- User Inventory Template -->
+<div class="content-header">
+    <h1>Inventory</h1>
+    <div class="header-actions">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search medications...">
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="content-container">
+    <!-- Filters -->
+    <div class="filters-container">
+        <div class="filter-group">
+            <label for="categoryFilter">Category:</label>
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="stockFilter">Stock Level:</label>
+            <select id="stockFilter">
+                <option value="">All</option>
+                <option value="low">Low Stock</option>
+                <option value="out">Out of Stock</option>
+                <option value="normal">Normal</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="expiryFilter">Expiry:</label>
+            <select id="expiryFilter">
+                <option value="">All</option>
+                <option value="expired">Expired</option>
+                <option value="expiring">Expiring Soon</option>
+                <option value="valid">Valid</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Inventory Table -->
+    <div class="table-responsive">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Stock</th>
+                    <th>Retail Price (₦)</th>
+                    <th>Wholesale Price (₦)</th>
+                    <th>Expiry Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="medicationTableBody">
+                <!-- Will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="emptyState" class="empty-state hidden">
+        <p>No medications found. Try adjusting your search or filters.</p>
+    </div>
+</div> 

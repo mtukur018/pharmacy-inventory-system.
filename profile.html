@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Pharmacy Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>Pharmacy System</h2>
+                <button id="toggleSidebar" class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="userDisplayName">Admin</h3>
+                    <p id="userRole">Administrator</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="admin-dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inventory-view.html">
+                            <i class="fas fa-pills"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="user-management.html">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reports.html">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li class="logout-item">
+                        <a href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>My Profile</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="headerUsername">Admin</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" id="headerLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-container">
+                <div class="dashboard-sections">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2>Personal Information</h2>
+                        </div>
+                        <div class="section-content">
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" value="System Administrator">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" value="admin" disabled>
+                                    <span class="help-text">Username cannot be changed</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" value="admin@pharmacy.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" id="phone" value="+1234567890">
+                                </div>
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <input type="text" id="role" value="Administrator" disabled>
+                                    <span class="help-text">Role cannot be changed</span>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" id="saveProfileBtn" class="primary-btn">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2>Change Password</h2>
+                        </div>
+                        <div class="section-content">
+                            <form id="passwordForm">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" required>
+                                    <span class="error-message" id="currentPasswordError"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" required>
+                                    <span class="error-message" id="newPasswordError"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" required>
+                                    <span class="error-message" id="confirmPasswordError"></span>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" id="changePasswordBtn" class="primary-btn">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-sections">
+                    <div class="dashboard-section full-width">
+                        <div class="section-header">
+                            <h2>Account Activity</h2>
+                        </div>
+                        <div class="section-content">
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date & Time</th>
+                                            <th>Activity</th>
+                                            <th>IP Address</th>
+                                            <th>Device</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="activityTableBody">
+                                        <tr>
+                                            <td>June 25, 2023 10:30 AM</td>
+                                            <td>Login</td>
+                                            <td>192.168.1.1</td>
+                                            <td>Chrome on Windows</td>
+                                        </tr>
+                                        <tr>
+                                            <td>June 24, 2023 5:45 PM</td>
+                                            <td>Logout</td>
+                                            <td>192.168.1.1</td>
+                                            <td>Chrome on Windows</td>
+                                        </tr>
+                                        <tr>
+                                            <td>June 24, 2023 9:15 AM</td>
+                                            <td>Login</td>
+                                            <td>192.168.1.1</td>
+                                            <td>Chrome on Windows</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notification -->
+        <div id="notification" class="notification hidden">
+            <span id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
+

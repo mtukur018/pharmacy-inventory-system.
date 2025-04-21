@@ -1,0 +1,55 @@
+{
+  "name": "pharmacy-inventory-system",
+  "version": "1.0.0",
+  "description": "A Pharmacy Inventory Management System",
+  "main": "main.js",
+  "author": "Abdurrahman",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^11.9.1",
+    "systeminformation": "^5.25.11"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^3.2.9",
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12"
+  },
+  "scripts": {
+    "electron": "electron .",
+    "electron:dev": "electron .",
+    "electron:build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "com.abdul-Dev.pharmacysystem",
+    "productName": "Pharmacy System",
+    "directories": {
+      "output": "release-builds"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{test,__tests__,tests}/**",
+      "!**/*.map",
+      "!release-builds/",
+      "!src/"
+    ],
+    "extraResources": [
+      {
+        "from": "./assets/",
+        "to": "assets"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

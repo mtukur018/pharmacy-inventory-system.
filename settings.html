@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Pharmacy Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>Pharmacy System</h2>
+                <button id="toggleSidebar" class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="userDisplayName">Admin</h3>
+                    <p id="userRole">Administrator</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="admin-dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-inventory.html">
+                            <i class="fas fa-pills"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="user-management.html">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reports.html">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li class="logout-item">
+                        <a href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Settings</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="headerUsername">Admin</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" id="headerLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-container">
+                <div class="dashboard-sections">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2>Application Settings</h2>
+                        </div>
+                        <div class="section-content">
+                            <form id="appSettingsForm">
+                                <div class="form-group">
+                                    <label for="pharmacyName">Pharmacy Name</label>
+                                    <input type="text" id="pharmacyName" value="My Pharmacy">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pharmacyAddress">Pharmacy Address</label>
+                                    <textarea id="pharmacyAddress" rows="3">123 Main Street, City, Country</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pharmacyPhone">Phone Number</label>
+                                    <input type="text" id="pharmacyPhone" value="+1234567890">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pharmacyEmail">Email Address</label>
+                                    <input type="email" id="pharmacyEmail" value="contact@mypharmacy.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="currencySymbol">Currency Symbol</label>
+                                    <input type="text" id="currencySymbol" value="₦">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lowStockThreshold">Low Stock Threshold</label>
+                                    <input type="number" id="lowStockThreshold" value="50" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="expiryWarningDays">Expiry Warning Days</label>
+                                    <input type="number" id="expiryWarningDays" value="30" min="1">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" id="saveAppSettingsBtn" class="primary-btn">Save Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2>Notification Settings</h2>
+                        </div>
+                        <div class="section-content">
+                            <form id="notificationSettingsForm">
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="lowStockNotification" checked>
+                                        Low Stock Notifications
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="expiryNotification" checked>
+                                        Expiry Notifications
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="userActivityNotification" checked>
+                                        User Activity Notifications
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="emailNotification">
+                                        Email Notifications
+                                    </label>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" id="saveNotificationSettingsBtn" class="primary-btn">Save Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-sections">
+                    <div class="dashboard-section full-width">
+                        <div class="section-header">
+                            <h2>System Information</h2>
+                        </div>
+                        <div class="section-content">
+                            <div class="system-info">
+                                <div class="info-item">
+                                  <span class="info-label">System Version:</span>
+                                  <span class="info-value" id="systemVersion">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                  <span class="info-label">Last Updated:</span>
+                                  <span class="info-value" id="lastUpdated">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                  <span class="info-label">Database Status:</span>
+                                  <span class="info-value status-ok" id="dbStatus">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                  <span class="info-label">Storage Usage:</span>
+                                  <span class="info-value" id="storageUsage">Loading...</span>
+                                </div>
+                              </div>
+                        
+                            <div class="form-actions">
+                                <button id="backupDataBtn" class="secondary-btn">Backup Data</button>
+                                <button id="restoreDataBtn" class="secondary-btn">Restore Data</button>
+                                <button id="clearDataBtn" class="danger-btn">Clear All Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content confirmation-modal">
+                <h2>Confirm Action</h2>
+                <p id="confirmationMessage">Are you sure you want to perform this action?</p>
+                <div class="form-actions">
+                    <button id="cancelActionBtn" class="secondary-btn">Cancel</button>
+                    <button id="confirmActionBtn" class="danger-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification -->
+        <div id="notification" class="notification hidden">
+            <span id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>
+

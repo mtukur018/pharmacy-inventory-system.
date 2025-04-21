@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Pharmacy Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>Pharmacy System</h2>
+                <button id="toggleSidebar" class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="userDisplayName">Admin</h3>
+                    <p id="userRole">Administrator</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="admin-dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-inventory.html">
+                            <i class="fas fa-pills"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="user-management.html">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="reports.html">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li class="logout-item">
+                        <a href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Reports</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="headerUsername">Admin</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" id="headerLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-container">
+                <div class="content-header-actions">
+                    <div class="filter-controls">
+                        <label for="reportType">Report Type:</label>
+                        <select id="reportType">
+                            <option value="inventory">Inventory Summary</option>
+                            <option value="expiry">Expiry Report</option>
+                            <option value="lowStock">Low Stock Report</option>
+                        </select>
+                        <button id="generateReportBtn" class="primary-btn">Generate Report</button>
+                    </div>
+                    <div class="date-range">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" id="startDate">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+
+                <div class="dashboard-sections">
+                    <div class="dashboard-section full-width">
+                        <div class="section-header">
+                            <h2 id="reportTitle">Inventory Summary Report</h2>
+                            <button id="printReportBtn" class="primary-btn">
+                                <i class="fas fa-print"></i> Print Report
+                            </button>
+                        </div>
+                        <div class="section-content">
+                            <div id="reportSummary" class="report-summary">
+                                <div class="summary-card">
+                                    <div class="summary-icon bg-primary">
+                                        <i class="fas fa-pills"></i>
+                                    </div>
+                                    <div class="summary-details">
+                                        <h3>Total Medications</h3>
+                                        <p id="totalMedications">0</p>
+                                    </div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-icon bg-success">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="summary-details">
+                                        <h3>Total Value</h3>
+                                        <p id="totalValue">₦0.00</p>
+                                    </div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-icon bg-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="summary-details">
+                                        <h3>Low Stock Items</h3>
+                                        <p id="lowStockCount">0</p>
+                                    </div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-icon bg-danger">
+                                        <i class="fas fa-calendar-times"></i>
+                                    </div>
+                                    <div class="summary-details">
+                                        <h3>Expiring Soon</h3>
+                                        <p id="expiringSoonCount">0</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead id="reportTableHead">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                            <th>Stock</th>
+                                            <th>Purchase Price (₦)</th>
+                                            <th>Retail Price (₦)</th>
+                                            <th>Wholesale Price (₦)</th>
+                                            <th>Expiry Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reportTableBody">
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mock API implementation for offline testing
+        window.api = {
+            medications: {
+                getAll: async () => {
+                    console.log('Mock API: Getting all medications');
+                    return [
+                        {
+                            id: 1,
+                            name: "Paracetamol",
+                            category: "Pain Relief",
+                            manufacturer: "ABC Pharma",
+                            stock: 100,
+                            retailPrice: 500,
+                            wholesalePrice: 400,
+                            expiryDate: "2024-12-31",
+                            description: "For pain relief and fever"
+                        },
+                        {
+                            id: 2,
+                            name: "Amoxicillin",
+                            category: "Antibiotics",
+                            manufacturer: "XYZ Pharma",
+                            stock: 50,
+                            retailPrice: 1500,
+                            wholesalePrice: 1200,
+                            expiryDate: "2024-10-15",
+                            description: "Antibiotic medication"
+                        }
+                    ];
+                }
+            },
+            settings: {
+                getAll: async () => {
+                    console.log('Mock API: Getting settings');
+                    return {
+                        lowStockThreshold: 20,
+                        expiryWarningDays: 30
+                    };
+                }
+            }
+        };
+    </script>
+    <script src="auth.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>
+

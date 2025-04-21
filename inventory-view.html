@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory View - Pharmacy Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>Pharmacy System</h2>
+                <button id="toggleSidebar" class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="userDisplayName">User</h3>
+                    <p id="userRole">Staff</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="user-dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="inventory-view.html">
+                            <i class="fas fa-pills"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="logout-item">
+                        <a href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Inventory View</h1>
+                <div class="header-actions">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="headerUsername">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#" id="headerLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-container">
+                <div class="content-header-actions">
+                    <div class="filter-controls">
+                        <label for="categoryFilter">Filter by Category:</label>
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="antibiotic">Antibiotics</option>
+                            <option value="analgesic">Analgesics</option>
+                            <option value="antiviral">Antivirals</option>
+                            <option value="cardiovascular">Cardiovascular</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search medications...">
+                        <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Stock</th>
+                                <th>Retail Price (₦)</th>
+                                <th>Wholesale Price (₦)</th>
+                                <th>Expiry Date</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryTableBody">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="emptyState" class="empty-state hidden">
+                    <p>No medications found. Adjust your search criteria.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notification -->
+        <div id="notification" class="notification hidden">
+            <span id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <!-- Mock API for testing (remove in production) -->
+    <script>
+        console.log("Setting up mock API");
+        window.api = window.api || {
+            medications: {
+                getAll: async function() {
+                    console.log("Mock API: Getting all medications");
+                    // Sample test data
+                    return [
+                        {
+                            id: 1,
+                            name: "Paracetamol",
+                            category: "analgesic",
+                            manufacturer: "ABC Pharma",
+                            stock: 100,
+                            retailPrice: 5.99,
+                            wholesalePrice: 4.50,
+                            expiryDate: "2024-12-31",
+                            description: "Pain reliever"
+                        },
+                        {
+                            id: 2,
+                            name: "Amoxicillin",
+                            category: "antibiotic",
+                            manufacturer: "XYZ Pharma",
+                            stock: 50,
+                            retailPrice: 12.99,
+                            wholesalePrice: 10.50,
+                            expiryDate: "2024-06-30",
+                            description: "Antibiotic"
+                        },
+                        {
+                            id: 3,
+                            name: "Vitamin C",
+                            category: "supplement",
+                            manufacturer: "Health Co",
+                            stock: 200,
+                            retailPrice: 8.99,
+                            wholesalePrice: 7.50,
+                            expiryDate: "2025-01-15",
+                            description: "Vitamin supplement"
+                        }
+                    ];
+                }
+            },
+            settings: {
+                getAll: async function() {
+                    console.log("Mock API: Getting settings");
+                    return {
+                        lowStockThreshold: 60,
+                        expiryWarningDays: 90
+                    };
+                }
+            }
+        };
+    </script>
+    <script src="auth.js"></script>
+    <script src="inventory-view.js"></script>
+</body>
+</html>
+
